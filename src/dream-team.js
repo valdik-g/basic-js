@@ -1,7 +1,7 @@
 const CustomError = require("../extensions/custom-error");
 
 module.exports = function createDreamTeam(members) {
-  if(members === 0)
+  if(members === undefined)
     return false;
   let CodeName = [];
   let j = 0, t = 0;
