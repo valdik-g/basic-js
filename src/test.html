@@ -6,9 +6,13 @@
     <script>
         function createDreamTeam(members) {
             let CodeName = [];
-            let j = 0;
+            let j = 0, t;
             for(let i = 0;i<members.length;i++) {
                 if (typeof members[i] === "string") {
+                    if(members[i][0] === ' ') {
+                        members[i] = members[i].replace(/\s/g, '');
+                    }
+
                     CodeName[j] = members[i][0];
                     j++;
                 }
@@ -17,7 +21,7 @@
                 return false;
             return CodeName.sort().join('');
         }
-        let arr = ['Matt', 1001, 'Dmitry', 'Max', true];
+        let arr = ['   Matt', 'Dmitry', 'Max'];
         console.log(createDreamTeam(arr));
     </script>
 </head>
