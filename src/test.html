@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function createDreamTeam(members) {
+            let CodeName = [];
+            let j = 0;
+            for(let i = 0;i<members.length;i++) {
+                if (typeof members[i] === "string") {
+                    CodeName[j] = members[i][0];
+                    j++;
+                }
+            }
+            if(CodeName.length === 0)
+                return false;
+            return CodeName.sort().join('');
+        }
+        let arr = ['Matt', 1001, 'Dmitry', 'Max', true];
+        console.log(createDreamTeam(arr));
+    </script>
+</head>
+<body>
+
+</body>
+</html>
