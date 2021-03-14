@@ -1,6 +1,8 @@
 const CustomError = require("../extensions/custom-error");
 
 module.exports = function createDreamTeam(members) {
+  if(members === 0)
+    return false;
   let CodeName = [];
   let j = 0, t = 0;
   for(let i = 0;i<members.length;i++) {
@@ -14,5 +16,5 @@ module.exports = function createDreamTeam(members) {
   }
   if(CodeName.length === 0)
     return false;
-  return CodeName.sort().join('');
+  return CodeName.join('').toUpperCase().split("").sort().join("");
 };
