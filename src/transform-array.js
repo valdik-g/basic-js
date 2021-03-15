@@ -1,27 +1,32 @@
 const CustomError = require("../extensions/custom-error");
 
 module.exports = function transform( arr ) {
-  if(typeof arr === "null" || typeof arr === "undefined"){
+  if(!Array.isArray(arr)){
     throw new RangeError('Error');
   }
   let NewArr = [];
-  NewArr = arr;
-  for(let i = 0;i<NewArr.length;i++){
-    if(typeof arr[i]==="string") {
-      if (arr[i] === '--discard-next' && typeof arr[i + 1] !== "undefined") {
-        NewArr.splice(i,2);
+  let k =0;
+  for(let i = 0;i<arr.length;i++){
+    if(arr[i] !== "--discard-prev" &&  arr[i] !== "--discard-next" &&  arr[i] !== "--double-next" &&  arr[i] !== "--double-prev") {
+      NewArr[k] = arr[i];
+      k++;
+    }
+    else {
+      if (arr[i] === '--discard-next' && arr[i + 1] !== "undefind" && typeof arr[i + 1] !== "undefined") {
+        i++;
       }
-      if (arr[i] === '--discard-prev' && typeof arr[i - 1] !== "undefined") {
-        NewArr.splice(i - 1,2);
+      if (arr[i] === '--discard-prev' && arr[i - 1] !== "undefind" &&  arr[i - 2] !== "--discard-next" && typeof arr[i - 1] !== "undefined") {
+        NewArr.splice(k - 1,1);
+        k--;
       }
-      if (arr[i] === '--double-next' && typeof arr[i + 1] !== "undefined") {
-        NewArr.splice(i,1, arr[i+1]);
+      if (arr[i] === '--double-next' && arr[i + 1] !== "undefind" && typeof arr[i + 1] !== "undefined") {
+        NewArr[k] = arr[i+1];
+        k++;
       }
-      if (arr[i] === '--double-prev' && typeof arr[i - 1] !== "undefined") {
-        NewArr.splice(i,1,arr[i-1])
+      if (arr[i] === '--double-prev' && arr[i - 1] !== "undefind" &&  arr[i - 2] !== "--discard-next" && typeof arr[i - 1] !== "undefined") {
+        NewArr[k] = arr[i-1];
+        k++;
       }
-      else
-        NewArr.splice(i,1);
     }
   }
   return NewArr;
