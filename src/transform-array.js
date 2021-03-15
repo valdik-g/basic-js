@@ -20,9 +20,6 @@ module.exports = function transform( arr ) {
       if (arr[i] === '--double-prev' && typeof arr[i - 1] !== "undefined") {
         NewArr.splice(i,1,arr[i-1])
       }
-      else
-        NewArr.splice(i,1);
-      i--;
     }
   }
   return NewArr;
