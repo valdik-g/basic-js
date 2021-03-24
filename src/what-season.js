@@ -4,9 +4,9 @@ module.exports = function getSeason(date) {
   if (date === 0 || date === undefined) {
     return 'Unable to determine the time of year!'
   }
-  /*if () {
-    throw new RangeError('Error')
-  }*/
+  if (Object.prototype.toString.call(date) !== '[object Date]') {
+    throw new Error();
+  }
   let k = date.getMonth();
   if (date.getDate() === 0) {
     k--;
